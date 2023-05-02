@@ -1,0 +1,12 @@
+.venv
+data/*
+out/*
+*.sw*
+__pycache__/
+.vscode
+data*
+audio_dataset/*
+dataset_*
+multi_venv
+pytorch2_venv
+latest_model.pth

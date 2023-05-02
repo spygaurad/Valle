@@ -1,0 +1,49 @@
+{
+    "random_masking": false,
+    "distillation": false,
+    "mixed_precision_training": false,
+    "aux_ctc": true,
+    "txt_batch_size": 16,
+    "img_batch_size": 16,
+    "img_txt_batch_size": 16,
+    "iter_dataset_index": 2,
+    "max_char_len": 256,
+    "shuffle": false,
+    "num_workers": 4,
+    "lr": 0.00003,
+    "epoch": 2500,
+    "char_embedding_dim": 512, 
+    "font_embedding_dim": 64,
+    
+    "model_eval_epoch": 5,
+
+    "transformer_encoder": {
+        "num_layers": 2,
+        "num_heads": 8,
+        "dropout": 0.5,
+        "ffn": 1024
+    },
+    "transformer_decoder": {
+        "num_layers": 8,
+        "num_heads": 8,
+        "dropout": 0.5,
+        "ffn": 1024
+    },
+    "resnet_encoder": {
+        "in_channels": 1,
+        "channels": "[8, 64, 128, 256, 512]",
+        "strides": "[(2, 1), (2,2), (2,1), (4, 2)]",
+        "depths": "[2, 2, 2, 1]",
+        "activation": "relu"
+    },
+    "resnet_decoder": {
+	"reshape_size": "[4, 4]",
+        "channels": "[ 512, 256, 128, 64, 32, 16, 8, 1]",
+        "strides": "[(2, 4), (2, 4), (2, 2), (2, 2), (2, 2), (1, 2), (1, 2)]",
+        "depths": "[1, 4, 5, 6, 6, 6, 1]",
+        "kernels_size": "[(2, 4), (2, 4), (2, 2), (2, 2), (2, 2), (3, 2), (3, 2)]",
+        "paddings": "[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (1, 0), (1, 0)]",
+        "activation": "leaky_relu"
+    },
+    "eval_gen_data_length": 2
+}
