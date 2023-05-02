@@ -9,10 +9,10 @@
     "iter_dataset_index": 2,
     "max_char_len": 256,
     "shuffle": false,
-    "num_workers": 4,
-    "lr": 0.00003,
+    "num_workers": 2,
+    "lr": 0.00001,
     "epoch": 2500,
-    "char_embedding_dim": 512, 
+    "char_embedding_dim": 256, 
     "font_embedding_dim": 64,
     
     "model_eval_epoch": 5,

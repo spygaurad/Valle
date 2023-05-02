@@ -28,9 +28,9 @@ Neptune is not being used
 Random Masking: False
 Distillation: False
 Aux CTC: True
-Linear Embedding: Linear(in_features=512, out_features=1027, bias=True)
-Number of parameters in image encoder: 4310528
-Number of parameters in text decoder: 18507271
+Linear Embedding: Linear(in_features=256, out_features=1027, bias=True)
+Number of parameters in image encoder: 1632000
+Number of parameters in text decoder: 7161607
 Txt2Img With Style
 Train Batch Size: 16
 Val Batch Size: 16
