@@ -4,7 +4,7 @@
 # This source code is licensed under the Apache 2.0 License license found in the
 # LICENSE file in the root directory of this source tree.
 
-# $1 : "multimodal_valle/Valle/audio_dataset"
+$1 : "../../audio_dataset"
 
 base_url=www.openslr.org/resources/12
 train_dir=train_960
@@ -32,9 +32,9 @@ done
 
 echo "Merge all train packs into one"
 mkdir -p ${download_dir}/LibriSpeech/${train_dir}/
-# for part in train-clean-100 train-clean-360 train-other-500; do
-#     mv ${download_dir}/LibriSpeech/${part}/* $download_dir/LibriSpeech/${train_dir}/
-# done
+for part in train-clean-100 train-clean-360 train-other-500; do
+    mv ${download_dir}/LibriSpeech/${part}/* $download_dir/LibriSpeech/${train_dir}/
+done
 
 python libri_prep_step1.py --dataset_path $1/LibriSpeech --vocab_size $vocab_size
 
