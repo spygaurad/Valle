@@ -3,7 +3,6 @@ data/*
 out/*
 *.sw*
 .vscode
-audio_dataset/*
 dataset_*
 multi_venv
 pytorch2_venv
