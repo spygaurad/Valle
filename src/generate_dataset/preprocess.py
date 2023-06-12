@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import os
-import sentencepiece as spm
+# import sentencepiece as spm
 
 LIBRI_SPEECH_DATASETS = [
     'train-clean-100', 'train-clean-360', 'train-other-500', 'dev-clean', 'dev-other', 'test-clean', 'test-other'
@@ -56,18 +56,18 @@ def prepare_tokenizer(train_transcripts, vocab_size):
 
     input_args = '--input=%s --model_prefix=%s --vocab_size=%s --model_type=%s'
     cmd = input_args % (input_file, model_name, vocab_size, model_type)
-    spm.SentencePieceTrainer.Train(cmd)
+    # spm.SentencePieceTrainer.Train(cmd)
 
 
 def generate_transcript_file(dataset_name, transcripts):
-    sp = spm.SentencePieceProcessor()
-    sp.Load("tokenizer.model")
+    # sp = spm.SentencePieceProcessor()
+    # sp.Load("tokenizer.model")
 
-    with open('../../data/%s-transcript.txt' % dataset_name, 'w') as f:
+    with open('../../audio_dataset/%s-transcript.txt' % dataset_name, 'w') as f:
         for transcript in transcripts:
             audio, transcript = transcript.split('|')
-            text = " ".join(sp.EncodeAsPieces(transcript))
-            label = " ".join([str(item) for item in sp.EncodeAsIds(transcript)])
+            text = transcript
+            label = " ".join([str(item) for item in transcript])
 
             f.write('%s\t%s\t%s\n' % (audio, text, label))
 
@@ -78,10 +78,10 @@ def merge_train_dev_transcript_file():
     lines = list()
 
     for dataset in merge_list:
-        with open('../../data/%s-transcript.txt' % dataset) as f:
+        with open('../../audio_dataset/%s-transcript.txt' % dataset) as f:
             for line in f.readlines():
                 lines.append(line)
 
-    with open('../../data/train.txt', 'w') as f:
+    with open('../../audio_dataset/train.txt', 'w') as f:
         for line in lines:
             f.write('%s' % line)
