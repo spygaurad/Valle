@@ -1,3 +1,4 @@
+audio_dataset/LibriSpeech/*
 .venv
 data/*
 out/*

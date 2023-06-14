@@ -696,7 +696,19 @@ class Handwriting(Task):
         # scheduler = lr_scheduler.CosineAnnealingLR(self.optimizer, 500, eta_min=0.0005/10.0)
         # scheduler = None
         # print(f"Length train set: {len(self.train_set)}")
-        return None
+        # return None
+        scheduler_t = torch.optim.lr_scheduler.OneCycleLR(
+            self.optimizer,
+            epochs=self.config.epoch,
+            steps_per_epoch=int(len(self.train_set)/2),
+            max_lr = 0.001/2,
+            pct_start = 0.05,
+            anneal_strategy = 'cos',
+            final_div_factor = 10**5
+        )
+
+        return scheduler_t
+
         scheduler_c = torch.optim.lr_scheduler.OneCycleLR(
             self.optimizer[0],
             epochs=self.config.epoch,
@@ -748,7 +760,7 @@ class Handwriting(Task):
 
     def get_optimizer(self):
         # return torch.optim.Adam(self.model.parameters(), lr=self.config.lr, amsgrad=True)
-        return torch.optim.AdamW(self.model.parameters(), lr=self.config.lr, weight_decay=1e-2)
+        return torch.optim.AdamW(self.model.parameters(), lr=self.config.lr, weight_decay=0.1)
         # return torch.optim.AdamW(self.model.text_decoder.parameters(), lr=self.config.lr, weight_decay=0.1)
         # ctc_optimizer = torch.optim.AdamW(self.model.image_encoder.parameters(), lr=self.config.lr*2, weight_decay=0.1)
         # ce_optimizer = torch.optim.AdamW(self.model.text_decoder.parameters(), lr=self.config.lr, weight_decay=0.1)
@@ -897,9 +909,9 @@ class Handwriting(Task):
             #     # print(f"Param Group: {param_group}")
             #     print(f"Current CNN LR: {current_lr}")
 
-            # for param_group in self.optimizer[1].param_groups:
-            #     current_lr = param_group['lr']
-            #     print(f"Current Transformer LR: {current_lr}")
+            for param_group in self.optimizer.param_groups:
+                current_lr = param_group['lr']
+                print(f"Current Transformer LR: {current_lr}")
 
             self.model.train()
             self.current_epoch = epoch
@@ -961,14 +973,16 @@ class Handwriting(Task):
                         self.scaler.step(self.optimizer)
                         self.scaler.update()
                         self.optimizer.zero_grad()
+                       
+                        if self.use_scheduler:
+                            self.scheduler.step()
+                            # self.scheduler[1].step() 
+
 
                     total_img2txt_loss.append(img2txt_loss.item())
 
                     bar.update(index)
 
-                    # if self.use_scheduler:
-                    #     self.scheduler[0].step()
-                    #     self.scheduler[1].step()
 
             train_df = pd.DataFrame(train_raw_texts, columns=["target", "predicted","audio_path"])
             train_df["edit_distance"] = train_df.apply(lambda row: editdistance.eval(row["target"], row["predicted"]), axis=1)
