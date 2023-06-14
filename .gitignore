@@ -1,4 +1,4 @@
-audio_dataset/LibriSpeech/*
+audio_dataset/*
 .venv
 data/*
 out/*
