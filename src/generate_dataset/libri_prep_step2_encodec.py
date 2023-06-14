@@ -17,15 +17,15 @@ def worker_function(item, out_path):
 
 if __name__ == '__main__':
 
-    manifest_audio_path = "../../audio_dataset/LibriSpeech/"
-    manifests = []
-    out_encodec_path = "../../audio_dataset/Encodec_LibriSpeech/"
+    manifest_audio_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/LibriSpeech/"
+    manifests = ['dev-clean']
+    out_encodec_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/Encodec_LibriSpeech/"
 
     pool = mp.Pool(16)
     jobs = []
 
     for manifest in manifests:
-        file = pd.read_csv(manifest, sep='\t')
+        file = pd.read_csv('/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/' + manifest + '-transcript.txt', sep='\t')
         file.columns = ['file_path','transcript', 'transcript_formatted']
         file['out_path'] = file['file_path']
         file['out_path'] = file['out_path'].str.replace('flac','pt')
