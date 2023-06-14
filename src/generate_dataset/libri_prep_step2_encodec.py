@@ -13,6 +13,7 @@ def worker_function(item, out_path):
     """
     waveform, sample_rate = torchaudio.load(item)
     _, indices, _ = codec(waveform, return_encoded = True)
+    os.makedirs(out_path, exist_ok = True)
     torch.save(indices, out_path)
 
 if __name__ == '__main__':
