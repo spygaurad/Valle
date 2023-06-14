@@ -3,7 +3,7 @@ import pandas as pd
 import torch
 import multiprocessing as mp
 import torchaudio
-from generate_dataset.encodec_wrapper import EncodecWrapper
+from encodec_wrapper import EncodecWrapper
 
 codec = EncodecWrapper()
 
