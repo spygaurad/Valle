@@ -13,6 +13,7 @@ def worker_function(item, out_path):
     """
     waveform, sample_rate = torchaudio.load(item)
     _, indices, _ = codec(waveform, return_encoded = True)
+    print(len(indices))
     os.makedirs(out_path, exist_ok = True)
     torch.save(indices, out_path)
 
@@ -35,11 +36,4 @@ if __name__ == '__main__':
         # data = pd.read_csv('output_list.txt', sep=" ", header=None)
         # data.columns = ["a", "b", "c", "etc."]
         for index, row in file.iterrows():
-            job = pool.apply_async(worker_function, (row['file_path'],row['out_path'],))
-            jobs.append(job)
-
-        for job in jobs:
-            job.get()
-
-    pool.close()
-    pool.join()
+            codec = worker_function(row['file_path'],row['out_path'])
