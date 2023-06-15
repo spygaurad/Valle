@@ -109,8 +109,8 @@ def main(args):
     # setup_for_distributed(device == 0)
     try:
         train_set, val_set, test_set, train_gen_set, val_gen_set, test_gen_set, char_model, _ = HandwritingDataloader(config)(args.data_type)
-    except Exception:
-        print('Error in Handwriting Dataloader')
+    except Exception as e:
+        print('Error in Handwriting Dataloader: ', e)
 
     config.run_id = args.run_id
     config.model_id = args.model_id

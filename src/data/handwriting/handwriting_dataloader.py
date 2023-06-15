@@ -26,7 +26,7 @@ class HandwritingDataloader:
         print(self.char_model.vocab_size)
 
         self.font_model = FontModel()
-        self.font_model(self.read_vocab_file(self.config.FONT_VOCAB_FILE))
+        self.font_model(self.read_vocab_file(self.config.CHAR_VOCAB_FILE))
         print("*****************************Font Model *************************************")
         # print(self.font_model.font2index)
         # print(self.font_model.n_fonts)

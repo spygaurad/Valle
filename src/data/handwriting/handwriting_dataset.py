@@ -20,7 +20,7 @@ import albumentations as A
 from hwb import HandWrittenBlot
 import sys
 sys.path.append('/Users/spygaurad/multimodal_valle/Valle/src/generate_dataset')
-from encodec_wrapper import EncodecWrapper
+from src.generate_dataset.encodec_wrapper import EncodecWrapper
 from src.data.handwriting.batch_output import BatchOutput
 # from src.data.handwriting.transforms import apply_data_augmentation
 # from src.data.handwriting.transforms import Dilation, ElasticDistortion, Erosion, DPIAdjusting, apply_data_augmentation
