@@ -19,11 +19,8 @@ import albumentations as A
 # from augmixations import HandWrittenBlot
 from hwb import HandWrittenBlot
 import sys
-
-sys.path.append('/mnt/media/wiseyak/multimodal_valle/everything2text-vqvae_codebook_debug/audio_dataset/')
+sys.path.append('/Users/spygaurad/multimodal_valle/Valle/src/generate_dataset')
 from encodec_wrapper import EncodecWrapper
-
-
 from src.data.handwriting.batch_output import BatchOutput
 # from src.data.handwriting.transforms import apply_data_augmentation
 # from src.data.handwriting.transforms import Dilation, ElasticDistortion, Erosion, DPIAdjusting, apply_data_augmentation
