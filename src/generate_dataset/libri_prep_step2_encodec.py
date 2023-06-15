@@ -14,7 +14,8 @@ def worker_function(item, out_path):
     waveform, sample_rate = torchaudio.load(item)
     _, indices, _ = codec(waveform, return_encoded = True)
     print(len(indices))
-    os.makedirs(out_path, exist_ok = True)
+    out_dir = os.path.dirname(out_path)
+    os.makedirs(out_dir, exist_ok = True)
     torch.save(indices, out_path)
     quit()
 
