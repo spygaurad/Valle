@@ -16,6 +16,7 @@ def worker_function(item, out_path):
     print(len(indices))
     os.makedirs(out_path, exist_ok = True)
     torch.save(indices, out_path)
+    quit()
 
 if __name__ == '__main__':
 
