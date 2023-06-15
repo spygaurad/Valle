@@ -23,7 +23,7 @@ def worker_function(item, out_path):
         os.makedirs(out_dir, exist_ok = True)
         torch.save(indices, out_path)
         return True
-    # quit()
+
 
 if __name__ == '__main__':
 
@@ -45,7 +45,7 @@ if __name__ == '__main__':
         # data.columns = ["a", "b", "c", "etc."]
         encodec_df = file.copy
         for index, row in file.iterrows():
-            codec = worker_function(row['file_path'],row['out_path'])
-            if not codec:
+            encodec_applied = worker_function(row['file_path'],row['out_path'])
+            if not encodec_applied:
                 encodec_df.drop(index, inplace=True)
         encodec_df.to_csv('/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/' + manifest + '-encodec-transcript.txt', index=False)
