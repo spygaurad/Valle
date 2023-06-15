@@ -107,8 +107,9 @@ def main(args):
 
     # dist.barrier()
     # setup_for_distributed(device == 0)
+    train_set, val_set, test_set, train_gen_set, val_gen_set, test_gen_set, char_model, _ = HandwritingDataloader(config)(args.data_type)
     try:
-        train_set, val_set, test_set, train_gen_set, val_gen_set, test_gen_set, char_model, _ = HandwritingDataloader(config)(args.data_type)
+        pass
     except Exception as e:
         print('Error in Handwriting Dataloader: ', e)
 
