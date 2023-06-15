@@ -1059,7 +1059,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
     def __init__(self, data, char_model, font_model, max_char_len, img_dir, augment=True):
         super().__init__(char_model, font_model)
 
-        self.audio_dir = "/mnt/media/wiseyak/multimodal_valle/everything2text-vqvae_codebook_debug/audio_dataset"
+        self.audio_dir = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset"
         self.data = data
         self.max_aud_len = None
         self.char_model = char_model
@@ -1089,7 +1089,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         except:
             print('Got error in audio: ', audio_file)
             # audio_file = audio_file.split('encodec_Libri/')[-1]
-            audio_file = audio_file.replace('encodec_Libri/L', 'L').replace('.pt','.flac')
+            # audio_file = audio_file.replace('encodec_Libri/L', 'L').replace('.pt','.flac')
             waveform, sample_rate = torchaudio.load(audio_file)
             _, indices, _ = self.codec(waveform, return_encoded = True)
             img = indices

@@ -5,9 +5,8 @@ import multiprocessing as mp
 import torchaudio
 from encodec_wrapper import EncodecWrapper
 
-codec = EncodecWrapper()
 
-def worker_function(item, out_path):
+def worker_function(item, out_path,codec):
     """
     do some work, write results to output
     """
@@ -26,16 +25,17 @@ def worker_function(item, out_path):
 
 
 if __name__ == '__main__':
+    codec = EncodecWrapper()
 
     manifest_audio_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/LibriSpeech/"
-    # manifests = ['dev-clean']
-    manifests = ['dev-other', 'test-clean','test-other','train-clean-100']
-    # manifests = ['train-clean360','train-other-500']
+    # manifests = ['dev-clean','test-clean']
+    # manifests = ['dev-other','test-other','train-clean-100']
+    manifests = ['train-clean360','train-other-500']
 
     out_encodec_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/Encodec_LibriSpeech/"
 
-    pool = mp.Pool(16)
-    jobs = []
+    # pool = mp.Pool(16)
+    # jobs = []
 
     for manifest in manifests:
         file = pd.read_csv('/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/' + manifest + '-transcript.txt', sep='\t')
@@ -48,7 +48,11 @@ if __name__ == '__main__':
         # data.columns = ["a", "b", "c", "etc."]
         encodec_df = file.copy()
         for index, row in file.iterrows():
-            encodec_applied = worker_function(row['file_path'],row['out_path'])
+            print('index: ', index, row['file_path'])
+            try:
+                encodec_applied = worker_function(row['file_path'],row['out_path'],codec)
+            except:
+                encodec_applied = False
             if not encodec_applied:
                 encodec_df.drop(index, inplace=True)
         encodec_df.to_csv('/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/' + manifest + '-encodec-transcript.txt', index=False)

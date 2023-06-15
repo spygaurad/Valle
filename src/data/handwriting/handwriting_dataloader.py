@@ -156,17 +156,42 @@ class HandwritingDataloader:
                                                 self.config.max_char_len, self.config.IMAGE_DIR, False)
             else:
                 print("Style Dataset")
-                df_file_path = "/mnt/media/wiseyak/multimodal_valle/everything2text-vqvae_codebook_debug/audio_dataset/"
+                df_file_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/"
 
 
                 # test-other-transcript_csv.csv
                 
-                train_file_path = df_file_path + "test-other-transcript_csv.csv"
+                # train_file_path = df_file_path + "test-other-transcript_csv.csv"
+                # train_file_1 = [
+                #                 df_file_path + "train_960-transcript_0_csv.csv",
+                #                 df_file_path + "train_960-transcript_1_csv.csv",
+                #                 df_file_path + "train_960-transcript_2_csv.csv",
+                #                 df_file_path + "train_960-transcript_3_csv.csv",
+                #                 # df_file_path + "train_960-transcript_4_csv.csv",
+                #                 # df_file_path + "train_960-transcript_5_csv.csv",
+                #                 # df_file_path + "train_960-transcript_6_csv.csv",
+                #                 # df_file_path + "train_960-transcript_7_csv.csv",
+                #                 # df_file_path + "train_960-transcript_8_csv.csv",
+                #                 # df_file_path + "train_960-transcript_9_csv.csv",
+                #                 # df_file_path + "train_960-transcript_10_csv.csv",
+                #                 # df_file_path + "train_960-transcript_11_csv.csv",
+                #                 # df_file_path + "train_960-transcript_12_csv.csv",
+                #                 # df_file_path + "train_960-transcript_13_csv.csv",
+                #                 # df_file_path + "train_960-transcript_14_csv.csv",
+                #                 # df_file_path + "train_960-transcript_15_csv.csv"
+                #                 # df_file_path + "train_960-transcript_16_csv.csv",
+                #                 ]
+
+                # eval_other_path = df_file_path + "dev-other-transcript_csv.csv"
+                # test_file_path = df_file_path + "test-clean-transcript_csv.csv"
+                # eval_file_path = df_file_path + "dev-clean-transcript_csv.csv"
+
+                # train_file_path = df_file_path + "test-other-transcript_csv.csv"
                 train_file_1 = [
-                                df_file_path + "train_960-transcript_0_csv.csv",
-                                df_file_path + "train_960-transcript_1_csv.csv",
-                                df_file_path + "train_960-transcript_2_csv.csv",
-                                df_file_path + "train_960-transcript_3_csv.csv",
+                                df_file_path + "train-other-500-transcript.txt",
+                                # df_file_path + "train_960-transcript_1_csv.csv",
+                                # df_file_path + "train_960-transcript_2_csv.csv",
+                                # df_file_path + "train_960-transcript_3_csv.csv",
                                 # df_file_path + "train_960-transcript_4_csv.csv",
                                 # df_file_path + "train_960-transcript_5_csv.csv",
                                 # df_file_path + "train_960-transcript_6_csv.csv",
@@ -182,9 +207,10 @@ class HandwritingDataloader:
                                 # df_file_path + "train_960-transcript_16_csv.csv",
                                 ]
 
-                eval_other_path = df_file_path + "dev-other-transcript_csv.csv"
-                test_file_path = df_file_path + "test-clean-transcript_csv.csv"
-                eval_file_path = df_file_path + "dev-clean-transcript_csv.csv"
+                eval_other_path = df_file_path + "dev-other-transcript.txt"
+                test_file_path = df_file_path + "test-clean-transcript.txt"
+                eval_file_path = df_file_path + "dev-clean-transcript.txt"
+
 
 
                 # df = pd.concat((pd.read_csv(f) for f in all_files), ignore_index=True)
@@ -192,10 +218,18 @@ class HandwritingDataloader:
 
                 # self.train_data = pd.read_csv(train_file_path, nrows=8)#[:20000]
                 # '''
-                self.train_data = pd.concat((pd.read_csv(f) for f in train_file_1))
-                self.eval_data = pd.read_csv(test_file_path)
-                self.test_data = pd.read_csv(eval_other_path)
-                self.eval_gen_data = pd.read_csv(eval_file_path)
+                self.train_data = pd.concat((pd.read_csv(f, sep='\t') for f in train_file_1))
+                self.train_data.columns = ['audio','text', 'transcript_formatted']
+
+                self.eval_data = pd.read_csv(test_file_path, sep='\t')
+                self.eval_data.columns = ['audio','text', 'transcript_formatted']
+
+                self.test_data = pd.read_csv(eval_other_path, sep='\t')
+                self.test_data.columns = ['audio','text', 'transcript_formatted']
+
+                self.eval_gen_data = pd.read_csv(eval_file_path, sep='\t')
+                self.eval_gen_data.columns = ['audio','text', 'transcript_formatted']
+
 
                 '''
                 # small dataset
