@@ -43,7 +43,7 @@ if __name__ == '__main__':
         file['file_path'] = manifest_audio_path + file['file_path']
         # data = pd.read_csv('output_list.txt', sep=" ", header=None)
         # data.columns = ["a", "b", "c", "etc."]
-        encodec_df = file.copy
+        encodec_df = file.copy()
         for index, row in file.iterrows():
             encodec_applied = worker_function(row['file_path'],row['out_path'])
             if not encodec_applied:
