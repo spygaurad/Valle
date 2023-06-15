@@ -12,12 +12,18 @@ def worker_function(item, out_path):
     do some work, write results to output
     """
     waveform, sample_rate = torchaudio.load(item)
-    _, indices, _ = codec(waveform, return_encoded = True)
-    print(len(indices))
-    out_dir = os.path.dirname(out_path)
-    os.makedirs(out_dir, exist_ok = True)
-    torch.save(indices, out_path)
-    quit()
+    audio_length =  waveform.shape[1] / sample_rate
+    if audio_length > 14.0:
+        return False
+    else:
+        _, indices, _ = codec(waveform, return_encoded = True)
+    # print(len(indices[0]))
+    # if len(indices[0]) > 
+        out_dir = os.path.dirname(out_path)
+        os.makedirs(out_dir, exist_ok = True)
+        torch.save(indices, out_path)
+        return True
+    # quit()
 
 if __name__ == '__main__':
 
@@ -37,5 +43,9 @@ if __name__ == '__main__':
         file['file_path'] = manifest_audio_path + file['file_path']
         # data = pd.read_csv('output_list.txt', sep=" ", header=None)
         # data.columns = ["a", "b", "c", "etc."]
+        encodec_df = file.copy
         for index, row in file.iterrows():
             codec = worker_function(row['file_path'],row['out_path'])
+            if not codec:
+                encodec_df.drop(index, inplace=True)
+        encodec_df.to_csv('/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/' + manifest + '-encodec-transcript.txt', index=False)
