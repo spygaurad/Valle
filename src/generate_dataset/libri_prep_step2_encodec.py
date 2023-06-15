@@ -28,7 +28,10 @@ def worker_function(item, out_path):
 if __name__ == '__main__':
 
     manifest_audio_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/LibriSpeech/"
-    manifests = ['dev-clean']
+    # manifests = ['dev-clean']
+    manifests = ['dev-other', 'test-clean','test-other','train-clean-100']
+    # manifests = ['train-clean360','train-other-500']
+
     out_encodec_path = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/Encodec_LibriSpeech/"
 
     pool = mp.Pool(16)
