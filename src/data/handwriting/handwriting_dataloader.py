@@ -230,6 +230,12 @@ class HandwritingDataloader:
                 self.eval_gen_data = pd.read_csv(eval_file_path, sep=',')
                 # self.eval_gen_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
 
+                self.train_data = self.train_data[self.train_data["transcript"].apply(lambda x: len(x) < 250)]
+                self.eval_data = self.eval_data[self.eval_data["transcript"].apply(lambda x: len(x) < 250)]
+                self.test_data = self.test_data[self.test_data["transcript"].apply(lambda x: len(x) < 250)]
+                self.eval_gen_data = self.eval_gen_data[self.eval_gen_data["transcript"].apply(lambda x: len(x) < 250)]
+                # self.train_data = self.train_data[self.train_data["transcript"].apply(lambda x: len(x) < 250)]
+
 
                 '''
                 # small dataset
