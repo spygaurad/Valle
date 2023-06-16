@@ -702,7 +702,7 @@ class Handwriting(Task):
             epochs=self.config.epoch,
             steps_per_epoch=int(len(self.train_set)),
             max_lr = 0.1,
-            # pct_start = 0.05,
+            pct_start = 0.005,
             # anneal_strategy = 'cos',
             # final_div_factor = 10**5
         )
