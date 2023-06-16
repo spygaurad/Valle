@@ -1084,7 +1084,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         try:
             img = torch.load(audio_file).squeeze(0)
         except:
-            # print('Got error in audio: ', audio_file)
+            print('Got error in audio: ', audio_file)
             # audio_file = audio_file.split('encodec_Libri/')[-1]
             # audio_file = audio_file.replace('encodec_Libri/L', 'L').replace('.pt','.flac')
             waveform, sample_rate = torchaudio.load(audio_file)
