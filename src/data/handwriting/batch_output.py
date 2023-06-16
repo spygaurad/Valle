@@ -2,7 +2,7 @@ from collections import defaultdict
 import numpy as np
 
 import torch
-
+import random
 class BatchOutput:
     def __init__(self, batch):
 
@@ -158,7 +158,13 @@ class BatchOutput:
             # self.txt_seq_len = 250 #max(self.data["img_txt_txt_tgt_len"]).item()
 
             # length of 1007
-            self.data['src_mask'] = [self.get_mask_seq_cat(self.txt_seq_len,self.img_seq_len)] * self.bs
+            # self.data['src_mask'] = [self.get_mask_seq_cat(self.txt_seq_len,self.img_seq_len)] * self.bs
+
+            # unified transformer mask after only 20 tokens
+            # selection = random.randint(0,30)
+            selection = 200
+            self.data['src_mask'] = [self.get_mask_seq_cat(self.txt_seq_len+selection,self.img_seq_len-selection)] * self.bs
+
             # self.data['src_mask'] = [self.get_mask_seq_cat(self.img_seq_len, self.txt_seq_len-1)] * self.bs
 
 
