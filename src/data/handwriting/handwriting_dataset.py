@@ -1056,7 +1056,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
     def __init__(self, data, char_model, font_model, max_char_len, img_dir, augment=True):
         super().__init__(char_model, font_model)
 
-        self.audio_dir = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset"
+        self.audio_dir = "/home/wiseyak/suraj/everything_text_valle/Valle/audio_dataset/LibriSpeech"
         self.data = data
         self.max_aud_len = None
         self.char_model = char_model
