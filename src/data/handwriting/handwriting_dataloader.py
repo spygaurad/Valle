@@ -188,7 +188,7 @@ class HandwritingDataloader:
 
                 # train_file_path = df_file_path + "test-other-transcript_csv.csv"
                 train_file_1 = [
-                                df_file_path + "train-other-100-encodec-transcript.txt",
+                                df_file_path + "train-clean-100-encodec-transcript.txt",
                                 # df_file_path + "train_960-transcript_1_csv.csv",
                                 # df_file_path + "train_960-transcript_2_csv.csv",
                                 # df_file_path + "train_960-transcript_3_csv.csv",
