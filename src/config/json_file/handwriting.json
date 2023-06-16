@@ -15,7 +15,7 @@
     "char_embedding_dim": 256, 
     "font_embedding_dim": 64,
     
-    "model_eval_epoch": 5,
+    "model_eval_epoch": 10,
 
     "transformer_encoder": {
         "num_layers": 2,

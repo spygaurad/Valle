@@ -1084,22 +1084,23 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         try:
             img = torch.load(audio_file).squeeze(0)
         except:
-            print('Got error in audio: ', audio_file)
+            # print('Got error in audio: ', audio_file)
             # audio_file = audio_file.split('encodec_Libri/')[-1]
             # audio_file = audio_file.replace('encodec_Libri/L', 'L').replace('.pt','.flac')
             waveform, sample_rate = torchaudio.load(audio_file)
             _, indices, _ = self.codec(waveform, return_encoded = True)
             img = indices
+        # print(img.shape)
 
         #For Ar, we only use first codebook
-        img = img[:,:1].squeeze(1)
+        img = img[:,:,:1].squeeze(1).squeeze(2).squeeze(0)
 
         '''
         audio_length = img.shape[1] / sample_rate
         if audio_length > self.max_aud_len:
             return None
         '''
-
+        # print(img.squeeze(2).squeeze(0).shape)
         # Return a dictionary containing the waveform, sample rate, and transcript
         # return {'waveform': waveform, 'sample_rate': sample_rate, 'transcript': transcript}
         dataset_instance = {
