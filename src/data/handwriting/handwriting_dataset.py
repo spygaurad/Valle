@@ -1069,9 +1069,11 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
+        # file_path,transcript,transcript_formatted,out_path
+
         # Get the audio file path and load the audio
         row = self.data.iloc[idx]
-        txt = row["text"]
+        txt = row["transcript"]
 
         # text + audio 
 
@@ -1080,7 +1082,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         # style text + text + eos + style hand image + prediction + eos
         # text + image 100 tokens + pred remaining token
 
-        audio_file = os.path.join(self.audio_dir, row['audio'])
+        audio_file = os.path.join(self.audio_dir, row['out_path'])
         try:
             img = torch.load(audio_file).squeeze(0)
         except:

@@ -219,16 +219,16 @@ class HandwritingDataloader:
                 # self.train_data = pd.read_csv(train_file_path, nrows=8)#[:20000]
                 # '''
                 self.train_data = pd.concat((pd.read_csv(f, sep=',') for f in train_file_1))
-                self.train_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
+                # self.train_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
 
                 self.eval_data = pd.read_csv(test_file_path, sep=',')
-                self.eval_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
+                # self.eval_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
 
                 self.test_data = pd.read_csv(eval_other_path, sep=',')
-                self.test_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
+                # self.test_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
 
                 self.eval_gen_data = pd.read_csv(eval_file_path, sep=',')
-                self.eval_gen_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
+                # self.eval_gen_data.columns = ['raw_audio','text', 'transcript_formatted','audio']
 
 
                 '''
