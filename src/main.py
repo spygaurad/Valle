@@ -41,7 +41,7 @@ torch.manual_seed(27)
 torch.cuda.manual_seed_all(27)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
-# torch.multiprocessing.set_sharing_strategy('file_descriptor')
+torch.multiprocessing.set_sharing_strategy('file_descriptor')
 
 def setup_for_distributed(is_master):
     """
