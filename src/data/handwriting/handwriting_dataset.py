@@ -1095,7 +1095,7 @@ class LibriSpeechDataset(DatasetHelper, Dataset):
         # print(img.shape)
 
         #For Ar, we only use first codebook
-        img = img[:,:,:1].squeeze(1).squeeze(2).squeeze(0)
+        img = img[:,:1].squeeze(1)
 
         '''
         audio_length = img.shape[1] / sample_rate
