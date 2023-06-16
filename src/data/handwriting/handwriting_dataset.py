@@ -10,7 +10,7 @@ import copy
 import random
 from torch.nn import functional as f
 from torch.utils.data import Dataset
-import torchvision
+import torchaudio
 # from torchvision.transforms import InterpolationMode, RandomPerspective
 # from torchvision.transforms.functional import (adjust_brightness,
 #                                                adjust_contrast, gaussian_blur,
