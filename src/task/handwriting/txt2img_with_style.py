@@ -700,11 +700,11 @@ class Handwriting(Task):
         scheduler_t = torch.optim.lr_scheduler.OneCycleLR(
             self.optimizer,
             epochs=self.config.epoch,
-            steps_per_epoch=int(len(self.train_set)/2),
-            max_lr = 0.001/2,
-            pct_start = 0.05,
-            anneal_strategy = 'cos',
-            final_div_factor = 10**5
+            steps_per_epoch=int(len(self.train_set)),
+            max_lr = 0.1,
+            # pct_start = 0.05,
+            # anneal_strategy = 'cos',
+            # final_div_factor = 10**5
         )
 
         return scheduler_t
